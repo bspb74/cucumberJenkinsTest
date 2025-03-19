@@ -22,7 +22,8 @@ public class WebDriverFactory {
 //        }
 //        System.setProperty("webdriver.chrome.driver",
 //                System.getProperty("user.dir") + chromeDriverPath);
-        WebDriverManager.chromedriver().setup();
+        WebDriverManager.chromedriver().cachePath(System.getProperty("user.dir") + "/src/test/java/com/Test/PageFactory/resources/drivers")
+                .avoidOutputTree().setup();
         WebDriverFactory.driver = new ChromeDriver(opts);
         System.out.println(System.getProperty("user.dir"));
 
