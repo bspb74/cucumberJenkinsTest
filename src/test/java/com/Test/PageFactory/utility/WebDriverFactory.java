@@ -15,6 +15,7 @@ public class WebDriverFactory {
         ChromeOptions opts = new ChromeOptions();
         opts.addArguments("--remote-allow-origins=*");
         opts.addArguments("--incognito");
+        opts.addArguments("--headless");
         System.setProperty("webdriver.chrome.driver",
                 System.getProperty("user.dir") +
                         "/src/test/resources/drivers/chromedriver.exe");
