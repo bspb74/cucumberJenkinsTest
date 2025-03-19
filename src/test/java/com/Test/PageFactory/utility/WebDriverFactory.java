@@ -16,9 +16,12 @@ public class WebDriverFactory {
         opts.addArguments("--remote-allow-origins=*");
         opts.addArguments("--incognito");
         opts.addArguments("--headless");
+        String chromeDriverPath = "/src/test/resources/drivers/chromedriver";
+        if (System.getProperty("os.name").toLowerCase().contains("win")) {
+            chromeDriverPath+=".exe";
+        }
         System.setProperty("webdriver.chrome.driver",
-                System.getProperty("user.dir") +
-                        "/src/test/resources/drivers/chromedriver.exe");
+                System.getProperty("user.dir") + chromeDriverPath);
         WebDriverManager.chromedriver().setup();
         WebDriverFactory.driver = new ChromeDriver(opts);
         System.out.println(System.getProperty("user.dir"));
