@@ -26,7 +26,7 @@ public class WebDriverFactory {
             System.out.println(System.getProperty("user.dir"));
         } else if (browser.equalsIgnoreCase("firefox")) {
             FirefoxOptions options = new FirefoxOptions();
-            options.setHeadless(false);
+            options.setHeadless(true);
             options.addArguments("-private");
             WebDriverManager.firefoxdriver()
                     .cachePath(System.getProperty("user.dir") + "/src/test/java/com/Test/PageFactory/resources/drivers")
