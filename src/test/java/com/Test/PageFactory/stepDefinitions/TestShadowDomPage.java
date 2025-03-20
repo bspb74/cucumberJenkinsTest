@@ -81,6 +81,7 @@ public class TestShadowDomPage implements Pages {
     }
     @Then("user exits")
     public void user_exits() {
+        System.out.println("Test");
         sp.clickElem("View");
         try {
             Thread.sleep(1000);
