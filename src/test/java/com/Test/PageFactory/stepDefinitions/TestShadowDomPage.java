@@ -87,5 +87,7 @@ public class TestShadowDomPage implements Pages {
         } catch (InterruptedException e) {
             e.getMessage();
         }
+        sp.clickElem("View");
+        wd.close();
     }
 }

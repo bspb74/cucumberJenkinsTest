@@ -41,7 +41,6 @@ public class WebDriverFactory {
         driver.navigate().to(url);
     }
 
-//    @AfterAll
     public void close() {
         driver.quit();
         try {
