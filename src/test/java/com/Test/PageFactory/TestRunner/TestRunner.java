@@ -12,8 +12,8 @@ import io.cucumber.junit.CucumberOptions;
         features = "src/test/java/com/Test/PageFactory/resources/features",
         glue = {"com/Test/PageFactory/stepDefinitions", "com/Test/PageFactory/utility"},
         plugin = {"pretty", "html:target/cucumber-html-reports/cucumberHtmlReport.html", "com.Test.PageFactory.TestRunner.GetStepName"},
-        dryRun = false
-//        tags = "not @Login"
+        dryRun = false,
+        tags = "@feature_2"
 )
 
 public class TestRunner {

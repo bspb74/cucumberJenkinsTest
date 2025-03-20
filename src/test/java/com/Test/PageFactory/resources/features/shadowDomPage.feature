@@ -1,4 +1,4 @@
-@Shadow
+@Shadow @feature_2
 Feature: Shadow DOM Page Test
 
 @Test2
