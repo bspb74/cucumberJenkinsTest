@@ -17,14 +17,14 @@ public class ShadowDomPage {
 
     private JavascriptExecutor js = (JavascriptExecutor) WebDriverFactory.driver;
 
-    public WebElement getElem(String item) {
-        WebElement we = (WebElement) js.executeScript("return document.querySelector('body > smart-ui-menu').shadowRoot.querySelector('[aria-label=\"" + item + "\"]')");
+    public WebElement getElem(String selector, String text) {
+        WebElement we = (WebElement) js.executeScript("return document.querySelector('body > smart-ui-menu').shadowRoot.querySelector('[" + selector + "=\"" + text + "\"]')");
         return we;
     }
 
-    public void clickElem(String elem) {
-        WebElement we = (WebElement) js.executeScript("return document.querySelector('body > smart-ui-menu').shadowRoot.querySelector('[aria-label=\"" + elem + "\"]')");
-        we.click();
+    public void clickElem(String selector, String elem) {
+        WebElement we = (WebElement) js.executeScript("return document.querySelector('body > smart-ui-menu').shadowRoot.querySelector('[" + selector + "=\"" + elem + "\"]')");
+        js.executeScript("arguments[0].click();", we);
     }
 
     public void enterValue (String value, WebElement we) {

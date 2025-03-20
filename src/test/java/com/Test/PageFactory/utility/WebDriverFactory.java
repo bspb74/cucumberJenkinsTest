@@ -3,6 +3,7 @@ package com.Test.PageFactory.utility;
 import java.time.Duration;
 
 import io.cucumber.java.AfterAll;
+import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -12,13 +13,15 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 
 public class WebDriverFactory {
     public static WebDriver driver;
-    String browser = "firefox";
+    String browser = "chrome";
     public WebDriverFactory() {
         if (browser.equalsIgnoreCase("chrome")) {
             ChromeOptions opts = new ChromeOptions();
+//            opts.addArguments("--disable-popup-blocking");
             opts.addArguments("--remote-allow-origins=*");
             opts.addArguments("--incognito");
-            opts.addArguments("--headless");
+            opts.setPageLoadStrategy(PageLoadStrategy.NORMAL);
+//            opts.addArguments("--headless");
             WebDriverManager.chromedriver()
                     .cachePath(System.getProperty("user.dir") + "/src/test/java/com/Test/PageFactory/resources/drivers")
                     .avoidOutputTree().setup();
@@ -26,7 +29,7 @@ public class WebDriverFactory {
             System.out.println(System.getProperty("user.dir"));
         } else if (browser.equalsIgnoreCase("firefox")) {
             FirefoxOptions options = new FirefoxOptions();
-            options.setHeadless(true);
+            options.setHeadless(false);
             options.addArguments("-private");
             WebDriverManager.firefoxdriver()
                     .cachePath(System.getProperty("user.dir") + "/src/test/java/com/Test/PageFactory/resources/drivers")
@@ -41,7 +44,7 @@ public class WebDriverFactory {
         driver.navigate().to(url);
     }
 
-    public void close() {
+    public static void close() {
         driver.quit();
         try {
             Thread.sleep(5000);

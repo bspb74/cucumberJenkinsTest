@@ -1,5 +1,7 @@
 package com.Test.PageFactory.TestRunner;
 
+import com.Test.PageFactory.utility.WebDriverFactory;
+import org.junit.AfterClass;
 import org.junit.runner.RunWith;
 
 import io.cucumber.junit.Cucumber;
@@ -15,5 +17,10 @@ import io.cucumber.junit.CucumberOptions;
 )
 
 public class TestRunner {
+
+    @AfterClass
+    public static void closeBrowser() {
+        WebDriverFactory.close();
+    }
 
 }

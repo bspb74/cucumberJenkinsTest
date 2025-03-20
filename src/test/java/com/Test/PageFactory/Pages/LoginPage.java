@@ -1,6 +1,5 @@
 package com.Test.PageFactory.Pages;
 
-import com.Test.PageFactory.utility.WebDriverFactory;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

@@ -21,74 +21,27 @@ public class TestShadowDomPage implements Pages {
     }
     @When("user selects encoding")
     public void user_selects_encoding() {
-        sp.clickElem("Encoding");
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.getMessage();
-        }
-        sp.clickElem("Encode in UTF-8");
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.getMessage();
-        }
+        sp.clickElem("aria-label", "Encoding");
+        sp.clickElem("aria-label","Encode in UTF-8");
     }
     @And("user selects view server explorer")
     public void user_selects_view_server_explorer() {
-        sp.clickElem("View");
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.getMessage();
-        }
-        sp.clickElem("Server Explorer");
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.getMessage();
-        }
+        sp.clickElem("aria-label","View");
+        sp.clickElem("aria-label","Server Explorer");
     }
     @And("user deselects view solution explorer")
     public void user_deselects_view_solution_explorer() {
-        sp.clickElem("View");
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.getMessage();
-        }
-        sp.clickElem("Solution Explorer");
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.getMessage();
-        }
+        sp.clickElem("aria-label","View");
+        sp.clickElem("aria-label","Solution Explorer");
     }
     @And("user deselects view server explorer")
     public void user_deselects_view_server_explorer() {
-        sp.clickElem("View");
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.getMessage();
-        }
-        sp.clickElem("Server Explorer");
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.getMessage();
-        }
+        sp.clickElem("aria-label","View");
+        sp.clickElem("aria-label","Server Explorer");
     }
     @Then("user exits")
     public void user_exits() {
         System.out.println("Test");
-        sp.clickElem("View");
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.getMessage();
-        }
-        sp.clickElem("View");
-        wd.close();
+        sp.clickElem("aria-label","View");
     }
 }
