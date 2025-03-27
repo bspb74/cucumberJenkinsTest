@@ -1,6 +1,6 @@
 package com.Test.PageFactory.Pages;
 
-import com.Test.PageFactory.utility.WebDriverFactory;
+import com.Test.PageFactory.utility.BasePage;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,14 +10,14 @@ import java.util.List;
 
 public class ShadowDomPage {
 
-    public WebDriver driver;
+    private WebDriver driver;
 
     public ShadowDomPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(this.driver,this);
     }
 
-    private JavascriptExecutor js = (JavascriptExecutor) WebDriverFactory.driver;
+    private JavascriptExecutor js = (JavascriptExecutor) BasePage.driver;
 
     public List<WebElement> getMenuItems(String selector, String text) {
         List<WebElement> menuItems = (List<WebElement>) js

@@ -9,7 +9,7 @@ Feature: Testing Branching strategy
     And user returns to search page
 
     Examples:
-      | search_text   | select_text     |
-      | weather       | AccuWeather     |
-      | stock market  | Financial News  |
-      | health trends | Top Health News |
+      | search_text   | select_text       |
+      | weather       | AccuWeather       |
+      | stock market  | Stock Market Data |
+      | health trends | 12 Health Trends  |
