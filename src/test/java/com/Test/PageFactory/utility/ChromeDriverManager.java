@@ -13,6 +13,7 @@ public class ChromeDriverManager implements BrowserDriver {
         ChromeOptions opts = new ChromeOptions();
         opts.addArguments("--remote-allow-origins=*");
         opts.addArguments("--incognito");
+        opts.addArguments("--no-sandbox");
         opts.setPageLoadStrategy(PageLoadStrategy.NORMAL);
         boolean headless = (System.getProperty("headless") != null);
         if (headless) {
