@@ -28,9 +28,10 @@ pipeline {
             //    to: "bspb74@gmail.com",
             //    from: "bspb74@gmail.com"
             //    archiveArtifacts artifacts: '**/target/cucumber-html-reports/cucumberHtmlReport.html', fingerprint: true
-            emailext body: "${FILE, path: 'target/cucumber-html-reports/cucumberHtmlReport.html'}",
-                    subject: "${env.JOB_NAME} - Build # ${env.BUILD_NUMBER} - Failed",
-                    mimeType: 'text/html',to: "bspb74@gmail.com"
+            emailext emailext mimeType: 'text/html',
+                                     body: "${FILE, path: 'target/cucumber-html-reports/cucumberHtmlReport.html'}",
+                                     subject: "${env.JOB_NAME} - Build # ${env.BUILD_NUMBER} - Failed",
+                                     to: "bspb74@gmail.com"
             }
         success {
             //mail body: '${File,path="target/cucumber-html-reports/cucumberHtmlReport.html"}',
@@ -38,9 +39,10 @@ pipeline {
             //    to: "bspb74@gmail.com",
             //    from: "bspb74@gmail.com"
             //    archiveArtifacts artifacts: '**/target/cucumber-html-reports/cucumberHtmlReport.html', fingerprint: true
-            emailext body: "${FILE, path: 'target/cucumber-html-reports/cucumberHtmlReport.html'}",
-                    subject: "${env.JOB_NAME} - Build # ${env.BUILD_NUMBER} - Successful",
-                    mimeType: 'text/html',to: "bspb74@gmail.com"
+            emailext mimeType: 'text/html',
+                body: "${FILE, path: 'target/cucumber-html-reports/cucumberHtmlReport.html'}",
+                subject: "${env.JOB_NAME} - Build # ${env.BUILD_NUMBER} - Successful",
+                to: "bspb74@gmail.com"
             }
 
     }
