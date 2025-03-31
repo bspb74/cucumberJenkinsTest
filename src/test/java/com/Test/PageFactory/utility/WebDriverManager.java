@@ -18,36 +18,37 @@ public class WebDriverManager {
     private WebDriverManager() {}
 
     private void initDriver(String browser) {
-        switch (browser) {
-            case "chrome":
-                ChromeOptions opts = new ChromeOptions();
-                opts.addArguments("--remote-allow-origins=*");
-                opts.addArguments("--incognito");
-                opts.setPageLoadStrategy(PageLoadStrategy.NORMAL);
-                boolean headless = (System.getProperty("headless") != null);
-                if (headless) {
-                    opts.addArguments("--headless");
-                }
-                io.github.bonigarcia.wdm.WebDriverManager.chromedriver()
-                        .cachePath(System.getProperty("user.dir") + "/src/test/java/com/Test/PageFactory/resources/drivers")
-                        .avoidOutputTree().setup();
-                driver.set(new ChromeDriver(opts));
-                break;
-            case "firefox":
-                FirefoxOptions options = new FirefoxOptions();
-                options.setHeadless(System.getProperty("headless") != null);
-                options.addArguments("-private");
-                io.github.bonigarcia.wdm.WebDriverManager.firefoxdriver()
-                        .cachePath(System.getProperty("user.dir") + "/src/test/java/com/Test/PageFactory/resources/drivers")
-                        .avoidOutputTree().setup();
-                driver.set(new FirefoxDriver(options));
-                break;
-            case "edge":
-                driver.set(new EdgeDriver());
-                break;
-            default:
-                throw new IllegalArgumentException("Unsupported browser: " + browser);
-        }
+        driver.set(DriverFactory.getFactoryDriver(browser).createDriver());
+//        switch (browser) {
+//            case "chrome":
+//                ChromeOptions opts = new ChromeOptions();
+//                opts.addArguments("--remote-allow-origins=*");
+//                opts.addArguments("--incognito");
+//                opts.setPageLoadStrategy(PageLoadStrategy.NORMAL);
+//                boolean headless = (System.getProperty("headless") != null);
+//                if (headless) {
+//                    opts.addArguments("--headless");
+//                }
+//                io.github.bonigarcia.wdm.WebDriverManager.chromedriver()
+//                        .cachePath(System.getProperty("user.dir") + "/src/test/java/com/Test/PageFactory/resources/drivers")
+//                        .avoidOutputTree().setup();
+//                driver.set(new ChromeDriver(opts));
+//                break;
+//            case "firefox":
+//                FirefoxOptions options = new FirefoxOptions();
+//                options.setHeadless(System.getProperty("headless") != null);
+//                options.addArguments("-private");
+//                io.github.bonigarcia.wdm.WebDriverManager.firefoxdriver()
+//                        .cachePath(System.getProperty("user.dir") + "/src/test/java/com/Test/PageFactory/resources/drivers")
+//                        .avoidOutputTree().setup();
+//                driver.set(new FirefoxDriver(options));
+//                break;
+//            case "edge":
+//                driver.set(new EdgeDriver());
+//                break;
+//            default:
+//                throw new IllegalArgumentException("Unsupported browser: " + browser);
+//        }
 
     }
 
