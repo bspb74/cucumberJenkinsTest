@@ -1,0 +1,37 @@
+pipeline {
+    agent any
+
+    // tools {
+    //     // Install the Maven version configured as "M3" and add it to the path.
+    //     maven "M3"
+    // }
+
+    stages {
+        stage('Build') {
+            steps {
+                // Get some code from a GitHub repository
+                git url: 'https://github.com/bspb74/cucumberJenkinsTest.git', credentialsId: '92528f87-03ae-4b76-9521-8fe1ce5b006b', branch: 'main'
+                // Run Maven on a Unix agent.
+                sh "mvn test -Dbrowser=firefox -Dheadless=true -Dskip.failsafe.tests=true -Dhudson.model.DirectoryBrowserSupport.CSP="
+            }
+        }
+        stage('Archive') {
+            steps {
+                zip zipFile: 'testRslts.zip', archive: true, dir: 'target'
+            }
+        }
+    }
+    post {
+        failure {
+            emailext attachmentsPattern: 'testRslts.zip', body: '''${SCRIPT, template="groovy-html.template"}''',
+                    subject: "${env.JOB_NAME} - Build # ${env.BUILD_NUMBER} - Failed",
+                    mimeType: 'text/html',to: "melhusb1974@yahoo.com"
+            }
+        success {
+            mailext attachmentsPattern: 'testRslts.zip', body: '''${SCRIPT, template="groovy-html.template"}''',
+                    subject: "${env.JOB_NAME} - Build # ${env.BUILD_NUMBER} - Successful",
+                    mimeType: 'text/html',to: "melhusb1974@yahoo.com"
+            }
+
+    }
+}
