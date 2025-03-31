@@ -17,7 +17,7 @@ pipeline {
         }
         stage('Archive') {
             steps {
-                zip zipFile: 'testRslts.zip', archive: true, dir: 'target'
+                zip zipFile: 'testRslts.zip', archive: false, dir: 'target'
             }
         }
     }
