@@ -23,18 +23,20 @@ pipeline {
     }
     post {
         failure {
-            mail body: '${FILE, path: "$WORKSPACE/target/cucumber-html-reports/cucumberHtmlReport.html"}',
+            emailext body: '${FILE, path:"target/cucumber-html-reports/cucumberHtmlReport.html"}',
                 subject: "${currentBuild.currentResult}: ${env.JOB_NAME} - build ${currentBuild.number}",
                 to: "bspb74@gmail.com",
-                from: "bspb74@gmail.com"
-                archiveArtifacts artifacts: 'target/cucumber-html-reports/cucumberHtmlReport.html', fingerprint: true
+                from: "bspb74@gmail.com",
+                mimeType: "text/html"
+                //archiveArtifacts artifacts: 'target/cucumber-html-reports/cucumberHtmlReport.html', fingerprint: true
             }
         success {
-            mail body: '${FILE, path: "$WORKSPACE/target/cucumber-html-reports/cucumberHtmlReport.html"}',
+            emailext body: '${FILE, path:"target/cucumber-html-reports/cucumberHtmlReport.html"}',
                 subject: "${currentBuild.currentResult}: ${env.JOB_NAME} - build ${currentBuild.number}",
                 to: "bspb74@gmail.com",
-                from: "bspb74@gmail.com"
-                archiveArtifacts artifacts: 'target/cucumber-html-reports/cucumberHtmlReport.html', fingerprint: true
+                from: "bspb74@gmail.com",
+                mimeType: "text/html"
+                //archiveArtifacts artifacts: 'target/cucumber-html-reports/cucumberHtmlReport.html', fingerprint: true
             }
 
     }
