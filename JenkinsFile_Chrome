@@ -29,7 +29,7 @@ pipeline {
             //    from: "bspb74@gmail.com"
             //    archiveArtifacts artifacts: '**/target/cucumber-html-reports/cucumberHtmlReport.html', fingerprint: true
             //emailext attachLog: true, body: '${FILE, path: "$WORKSPACE/target/cucumber-html-reports/cucumberHtmlReport.html"}', mimeType: "text/html", replyTo: 'bspb74@gmail.com', subject: "${currentBuild.currentResult}: ${env.JOB_NAME} - build ${currentBuild.number}", to: 'bspb74@gmail.com'
-            emailext attachLog: true, body: '${FILE, path: "$WORKSPACE/target/cucumber-html-reports/cucumberHtmlReport.html"}', mimeType: "text/html", subject: "What the heck", to: 'bspb74@gmail.com'
+            emailext attachLog: true, body: '''${FILE, path: "$WORKSPACE/target/cucumber-html-reports/cucumberHtmlReport.html"}''', mimeType: "text/html", subject: "What the heck", to: 'bspb74@gmail.com'
             }
         success {
             //mail body: '${File,path="target/cucumber-html-reports/cucumberHtmlReport.html"}',
@@ -38,7 +38,7 @@ pipeline {
             //    from: "bspb74@gmail.com"
             //    archiveArtifacts artifacts: '**/target/cucumber-html-reports/cucumberHtmlReport.html', fingerprint: true
             //emailext attachLog: true, body: '${FILE, path: "$WORKSPACE/target/cucumber-html-reports/cucumberHtmlReport.html"}', mimeType: "text/html", replyTo: 'bspb74@gmail.com', subject: "${currentBuild.currentResult}: ${env.JOB_NAME} - build ${currentBuild.number}", to: 'bspb74@gmail.com'
-            emailext attachLog: true, body: '${FILE, path: "$WORKSPACE/target/cucumber-html-reports/cucumberHtmlReport.html"}', mimeType: "text/html", subject: "What the heck", to: 'bspb74@gmail.com'
+            emailext attachLog: true, body: '''${FILE, path: "$WORKSPACE/target/cucumber-html-reports/cucumberHtmlReport.html"}''', mimeType: "text/html", subject: "What the heck", to: 'bspb74@gmail.com'
             }
 
     }
