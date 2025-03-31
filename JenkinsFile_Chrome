@@ -23,28 +23,14 @@ pipeline {
     }
     post {
         failure {
-            publishHTML (target : [allowMissing: false,
-                alwaysLinkToLastBuild: true,
-                keepAll: true,
-                reportDir: 'reports',
-                reportFiles: 'target/cucumer-html-reports/cucumberHtmlReport.html',
-                reportName: 'Cucumber_Failed_Results',
-                reportTitles: 'Failure Report'])
-            //emailext attachmentsPattern: 'testRslts.zip', body: '''${SCRIPT, template="groovy-html.template"}''',
-            //        subject: "${env.JOB_NAME} - Build # ${env.BUILD_NUMBER} - Failed",
-            //        mimeType: 'text/html',to: "melhusb1974@yahoo.com"
+            emailext attachmentsPattern: 'testRslts.zip', body: '''${SCRIPT, template="groovy-html.template"}''',
+                    subject: "${env.JOB_NAME} - Build # ${env.BUILD_NUMBER} - Failed",
+                    mimeType: 'text/html',to: "melhusb1974@yahoo.com"
             }
         success {
-            publishHTML (target : [allowMissing: false,
-                alwaysLinkToLastBuild: true,
-                keepAll: true,
-                reportDir: 'reports',
-                reportFiles: 'target/cucumer-html-reports/cucumberHtmlReport.html',
-                reportName: 'Cucumber_Passed_Results',
-                reportTitles: 'Success Report'])
-            //mailext attachmentsPattern: 'testRslts.zip', body: '''${SCRIPT, template="groovy-html.template"}''',
-            //        subject: "${env.JOB_NAME} - Build # ${env.BUILD_NUMBER} - Successful",
-            //        mimeType: 'text/html',to: "melhusb1974@yahoo.com"
+            emailext attachmentsPattern: 'testRslts.zip', body: '''${SCRIPT, template="groovy-html.template"}''',
+                    subject: "${env.JOB_NAME} - Build # ${env.BUILD_NUMBER} - Successful",
+                    mimeType: 'text/html',to: "melhusb1974@yahoo.com"
             }
 
     }
