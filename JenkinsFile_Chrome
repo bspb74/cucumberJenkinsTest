@@ -12,7 +12,7 @@ pipeline {
                 // Get some code from a GitHub repository
                 git url: 'https://github.com/bspb74/cucumberJenkinsTest.git', credentialsId: '92528f87-03ae-4b76-9521-8fe1ce5b006b', branch: 'main'
                 // Run Maven on a Unix agent.
-                sh "mvn test -Dbrowser=chrome -Dheadless=true -Dskip.failsafe.tests=true -Dhudson.model.DirectoryBrowserSupport.CSP="
+                sh "mvn verify -Dbrowser=chrome -Dheadless=true -Dskip.surefire.tests=true -Dhudson.model.DirectoryBrowserSupport.CSP="
             }
         }
         //stage('Archive') {
