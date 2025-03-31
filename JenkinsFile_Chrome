@@ -29,7 +29,7 @@ pipeline {
             //    from: "bspb74@gmail.com"
             //    archiveArtifacts artifacts: '**/target/cucumber-html-reports/cucumberHtmlReport.html', fingerprint: true
             emailex mimeType: 'text/html',
-                body: "${FILE, path: 'target/cucumber-html-reports/cucumberHtmlReport.html'}",
+                body: '${FILE, path: "target/cucumber-html-reports/cucumberHtmlReport.html"}',
                 subject: "${env.JOB_NAME} - Build # ${env.BUILD_NUMBER} - Failed",
                 to: "bspb74@gmail.com"
             }
@@ -40,7 +40,7 @@ pipeline {
             //    from: "bspb74@gmail.com"
             //    archiveArtifacts artifacts: '**/target/cucumber-html-reports/cucumberHtmlReport.html', fingerprint: true
             emailext mimeType: 'text/html',
-                body: "${FILE, path: 'target/cucumber-html-reports/cucumberHtmlReport.html'}",
+                body: "${FILE, path: "target/cucumber-html-reports/cucumberHtmlReport.html"}',
                 subject: "${env.JOB_NAME} - Build # ${env.BUILD_NUMBER} - Successful",
                 to: "bspb74@gmail.com"
             }
