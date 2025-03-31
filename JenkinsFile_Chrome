@@ -23,10 +23,18 @@ pipeline {
     }
     post {
         failure {
-            emailext subject: '$DEFAULT_SUBJECT - Failed', body: '$DEFAULT_CONTENT', to: 'bspb74@gmail.com'
+            mail body: '$DEFAULT_CONTENT',
+                subject: '$DEFAULT_SUBJECT',
+                to: "bspb74@gmail.com",
+                from: "bspb74@gmail.com"
+                archiveArtifacts artifacts: '$WORKSPACE/target/cucumber-html-reports/cucumberHtmlReport.html', fingerprint: true
             }
         success {
-            emailext subject: '$DEFAULT_SUBJECT - Passed', body: '$DEFAULT_CONTENT', to: 'bspb74@gmail.com'
+            mail body: '$DEFAULT_CONTENT',
+                subject: '$DEFAULT_SUBJECT',
+                to: "bspb74@gmail.com",
+                from: "bspb74@gmail.com"
+                archiveArtifacts artifacts: '$WORKSPACE/target/cucumber-html-reports/cucumberHtmlReport.html', fingerprint: true
             }
 
     }
