@@ -10,7 +10,7 @@ pipeline {
         stage('Build') {
             steps {
                 // Get some code from a GitHub repository
-                git url: 'https://github.com/bspb74/cucumberJenkinsTest.git', credentialsId: '92528f87-03ae-4b76-9521-8fe1ce5b006b', branch: 'main'
+                git url: 'https://github.com/bspb74/cucumberJenkinsTest.git', credentialsId: '92528f87-03ae-4b76-9521-8fe1ce5b006b', branch: 'email_testing'
                 // Run Maven on a Unix agent.
                 sh "mvn verify -Dbrowser=chrome -Dheadless=true -Dskip.surefire.tests=true -Dhudson.model.DirectoryBrowserSupport.CSP="
             }
