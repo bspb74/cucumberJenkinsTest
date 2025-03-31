@@ -15,11 +15,11 @@ pipeline {
                 sh "mvn test -Dbrowser=chrome -Dheadless=true -Dskip.failsafe.tests=true -Dhudson.model.DirectoryBrowserSupport.CSP="
             }
         }
-        stage('Archive') {
-            steps {
-                zip zipFile: 'testRslts.zip', archive: false, dir: 'target'
-            }
-        }
+        //stage('Archive') {
+        //    steps {
+        //        zip zipFile: 'testRslts.zip', archive: false, dir: 'target'
+        //    }
+        //}
     }
     post {
         failure {
