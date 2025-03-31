@@ -30,7 +30,7 @@ pipeline {
                 archiveArtifacts artifacts: 'target/cucumber-html-reports/cucumberHtmlReport.html', fingerprint: true
             emailext attachmentsPattern: 'target/cucumber-html-reports/cucumberHtmlReport.html', body: '''${SCRIPT, template="groovy-html.template"}''',
                     subject: "${env.JOB_NAME} - Build # ${env.BUILD_NUMBER} - Failed",
-                    mimeType: 'text/html',to: "cucumber-html-reports/cucumberHtmlReport.html"
+                    mimeType: 'text/html',to: "bspb74@gmail.com"
             }
         success {
             mail body: "Please find the Cucumber report attached.",
@@ -40,7 +40,7 @@ pipeline {
                 archiveArtifacts artifacts: 'target/cucumber-html-reports/cucumberHtmlReport.html', fingerprint: true
             emailext attachmentsPattern: 'target/cucumber-html-reports/cucumberHtmlReport.html', body: '''${SCRIPT, template="groovy-html.template"}''',
                     subject: "${env.JOB_NAME} - Build # ${env.BUILD_NUMBER} - Successful",
-                    mimeType: 'text/html',to: "cucumber-html-reports/cucumberHtmlReport.html"
+                    mimeType: 'text/html',to: "bspb74@gmail.com"
             }
 
     }
