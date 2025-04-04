@@ -19,7 +19,7 @@ public class ChromeDriverManager implements BrowserDriver {
         if (headless) {
             opts.addArguments("--headless");
         }
-        WebDriverManager.chromedriver()
+        WebDriverManager.chromedriver().clearDriverCache()
                 .cachePath(System.getProperty("user.dir") + "/src/test/java/com/Test/PageFactory/resources/drivers")
                 .avoidOutputTree().setup();
         return new ChromeDriver(opts);
