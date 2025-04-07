@@ -14,7 +14,7 @@ import org.junit.AfterClass;
         glue = {"com/Test/PageFactory/stepDefinitions", "com/Test/PageFactory/utility"},
         plugin = {"pretty", "html:target/cucumber-html-reports/cucumberHtmlReport.html", "com.Test.PageFactory.TestRunner.GetStepName",
         "rerun:target/failed.txt","timeline:target"},
-//        tags = "@Login",
+        tags = "@Login",
         dryRun = false
 )
 
