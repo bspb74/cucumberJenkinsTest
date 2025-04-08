@@ -12,28 +12,52 @@ pipeline {
         stage('Build') {
             steps {
                 // Get some code from a GitHub repository
-                git url: 'https://github.com/bspb74/cucumberJenkinsTest.git', credentialsId: '92528f87-03ae-4b76-9521-8fe1ce5b006b', branch: 'main'
+                git url: 'https://github.com/bspb74/cucumberJenkinsTest.git', credentialsId: '92528f87-03ae-4b76-9521-8fe1ce5b006b', branch: 'email_testing'
                 // Run Maven on a Unix agent.
-                sh "mvn test -Dbrowser=firefox -Dheadless=true -Dskip.failsafe.tests=true -Dhudson.model.DirectoryBrowserSupport.CSP="
-            }
-        }
-        stage('Archive') {
-            steps {
-                zip zipFile: 'testRslts.zip', archive: true, dir: 'target'
+                sh "echo $PATH"
+                sh "mvn --version"
+                // sh "mvn clean"
+                sh "pwd"
+                sh "mvn clean test -Dbrowser=firefox -Dheadless=true -Dskip.failsafe.tests=true -Dhudson.model.DirectoryBrowserSupport.CSP="
+                // sleep(time:60,unit:"SECONDS")
+                cucumber buildStatus: 'UNCHANGED',
+                    customCssFiles: '',
+                    customJsFiles: '',
+                    failedFeaturesNumber: -1,
+                    failedScenariosNumber: -1,
+                    failedStepsNumber: -1,
+                    fileIncludePattern: '**/*.json',
+                    jsonReportDirectory: 'target/jsonReports',
+                    pendingStepsNumber: -1,
+                    reportTitle: 'Cucumber Report',
+                    skippedStepsNumber: -1,
+                    sortingMethod: 'ALPHABETICAL',
+                    undefinedStepsNumber: -1
             }
         }
     }
     post {
         failure {
-            emailext attachmentsPattern: 'testRslts.zip', body: '''${SCRIPT, template="groovy-html.template"}''',
-                    subject: "${env.JOB_NAME} - Build # ${env.BUILD_NUMBER} - Failed",
-                    mimeType: 'text/html',to: "melhusb1974@yahoo.com"
+            script {
+                def buildUrl = env.BUILD_URL
+                def reportUrl = buildUrl + "target/jsonReports"
+                mail(
+                    to: 'bspb74@gmail.com',
+                    subject: "Jenkins Build ${BUILD_NUMBER} - Cucumber Report",
+                    body: "Build ${BUILD_NUMBER} completed.  Cucumber report available: ${reportUrl}"
+                )
             }
+        }
         success {
-            mailext attachmentsPattern: 'testRslts.zip', body: '''${SCRIPT, template="groovy-html.template"}''',
-                    subject: "${env.JOB_NAME} - Build # ${env.BUILD_NUMBER} - Successful",
-                    mimeType: 'text/html',to: "melhusb1974@yahoo.com"
+            script {
+                def buildUrl = env.BUILD_URL
+                def reportUrl = buildUrl + "target/jsonReports"
+                mail(
+                    to: 'bspb74@gmail.com,melhusb1974@yahoo.com,ur4me74@gmail.com',
+                    subject: "Jenkins Build ${BUILD_NUMBER} - Cucumber Report",
+                    body: "Build ${BUILD_NUMBER} completed.  Cucumber report available: ${reportUrl}"
+                )
             }
-
+        }
     }
 }

@@ -3,38 +3,61 @@ pipeline {
         label 'ec2'
     }
 
+    // tools {
+    //     // Install the Maven version configured as "M3" and add it to the path.
+    //     maven "M3"
+    // }
+
     stages {
         stage('Build') {
             steps {
                 // Get some code from a GitHub repository
                 git url: 'https://github.com/bspb74/cucumberJenkinsTest.git', credentialsId: '92528f87-03ae-4b76-9521-8fe1ce5b006b', branch: 'email_testing'
                 // Run Maven on a Unix agent.
-                sh "mvn verify -Dbrowser=chrome -Dheadless=true -Dskip.surefire.tests=false -Dhudson.model.DirectoryBrowserSupport.CSP="
+                sh "echo $PATH"
+                sh "mvn --version"
+                // sh "mvn clean"
+                sh "pwd"
+                sh "mvn clean test -Dbrowser=chrome -Dheadless=true -Dskip.failsafe.tests=true -Dhudson.model.DirectoryBrowserSupport.CSP="
+                // sleep(time:60,unit:"SECONDS")
+                cucumber buildStatus: 'UNCHANGED',
+                    customCssFiles: '',
+                    customJsFiles: '',
+                    failedFeaturesNumber: -1,
+                    failedScenariosNumber: -1,
+                    failedStepsNumber: -1,
+                    fileIncludePattern: '**/*.json',
+                    jsonReportDirectory: 'target/jsonReports',
+                    pendingStepsNumber: -1,
+                    reportTitle: 'Cucumber Report',
+                    skippedStepsNumber: -1,
+                    sortingMethod: 'ALPHABETICAL',
+                    undefinedStepsNumber: -1
             }
         }
-        //stage('Archive') {
-        //    steps {
-        //        zip zipFile: 'testRslts.zip', archive: false, dir: 'target'
-        //    }
-        //}
     }
     post {
         failure {
-            emailext body: 'TEST FAILED',
-                subject: "${currentBuild.currentResult}: ${env.JOB_NAME} - build ${currentBuild.number}",
-                to: "bspb74@gmail.com",
-                from: "bspb74@gmail.com",
-                mimeType: "text/html"
-                archiveArtifacts artifacts: 'target/cucumber-html-reports/cucumberHtmlReport.html', fingerprint: true
+            script {
+                def buildUrl = env.BUILD_URL
+                def reportUrl = buildUrl + "target/jsonReports"
+                mail(
+                    to: 'bspb74@gmail.com',
+                    subject: "Jenkins Build ${BUILD_NUMBER} - Cucumber Report",
+                    body: "Build ${BUILD_NUMBER} completed.  Cucumber report available: ${reportUrl}"
+                )
             }
+        }
         success {
-            emailext body: 'TEST PASSED',
-                subject: "${currentBuild.currentResult}: ${env.JOB_NAME} - build ${currentBuild.number}",
-                to: "bspb74@gmail.com",
-                from: "bspb74@gmail.com",
-                mimeType: "text/html"
-                archiveArtifacts artifacts: 'target/cucumber-html-reports/cucumberHtmlReport.html', fingerprint: true
+            script {
+                def buildUrl = env.BUILD_URL
+                def reportUrl = buildUrl + "target/jsonReports"
+                mail(
+                    to: 'bspb74@gmail.com,melhusb1974@yahoo.com,ur4me74@gmail.com',
+                    subject: "Jenkins Build ${BUILD_NUMBER} - Cucumber Report",
+                    body: "Build ${BUILD_NUMBER} completed.  Cucumber report available: ${reportUrl}"
+                )
             }
-
+        }
     }
 }
