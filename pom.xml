@@ -231,17 +231,26 @@
                 <executions>
                     <execution>
                         <id>generate-report</id>
-                        <phase>verify</phase>
+                        <phase>test</phase>
                         <goals>
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <projectName>Cucumber Project</projectName>
-                            <outputDirectory>${project.build.directory}/cucumber-reports</outputDirectory>
+                            <projectName>${project.name}</projectName>
+                            <skip>false</skip>
+                            <!-- output directory for the generated report -->
+                            <outputDirectory>${project.build.directory}/jsonReports/reports</outputDirectory>
+                            <!-- optional, defaults to outputDirectory if not specified -->
+                            <inputDirectory>${project.build.directory}/jsonReports</inputDirectory>
                             <jsonFiles>
-                                <jsonFile>${project.build.directory}/cucumber-reports/Cucumber.json</jsonFile>
+                                <!-- supports wildcard or name pattern -->
+                                <param>**/*.json</param>
                             </jsonFiles>
-                            <reportTargetDirectory>${project.build.directory}/cucumber-reports</reportTargetDirectory>
+                            <mergeFeaturesById>false</mergeFeaturesById>
+                            <!-- optional, set true to get a final report with latest results of the same test from different test runs -->
+                            <mergeFeaturesWithRetest>false</mergeFeaturesWithRetest>
+                            <!-- optional, set true to fail build on test failures -->
+                            <checkBuildResult>false</checkBuildResult>
                         </configuration>
                     </execution>
                 </executions>

@@ -13,7 +13,7 @@ import org.junit.AfterClass;
         features = "src/test/java/com/Test/PageFactory/resources/features",
         glue = {"com/Test/PageFactory/stepDefinitions", "com/Test/PageFactory/utility"},
         plugin = {"pretty", "html:target/cucumber-html-reports/cucumberHtmlReport.html", "com.Test.PageFactory.TestRunner.GetStepName",
-        "rerun:target/failed.txt","timeline:target"},
+        "rerun:target/failed.txt", "json:target/jsonReports/Cucumber.json", "timeline:target"},
         tags = "@Login",
         dryRun = false
 )
